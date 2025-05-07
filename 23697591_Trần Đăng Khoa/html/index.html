@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nước Hoa VIP</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div>
+        <!-- Tiêu đề trên navbar -->
+        <div class="text-center py-2" style="background-color: #f1f1f1;">
+            <h2 class="m-0" style="color: #c82333; font-weight: 700;">NƯỚC HOA CHÍNH HÃNG</h2>
+            <p class="m-0" style="font-weight: 600;">Chất lượng tạo niềm tin - Uy tín làm thương hiệu</p>
+        </div>
+
+        <div class="container py-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm..." onkeyup="searchProducts()">
+          </div>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #a61010;">
+            <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <!-- Menu giữa navbar -->
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 justify-content-center">
+                <!-- Thương hiệu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="thuongHieuDropdown" role="button" data-bs-toggle="dropdown">THƯƠNG HIỆU</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Dior')">Dior</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Chanel')">Chanel</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Gucci')">Gucci</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Versace')">Versace</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Ralph-Lauren')">Raph Lauren</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Nautica')">Nautica</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Marc Jacobs')">Marc Jacobs</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Dolce-Gabbana')">Dolce & Gabbana</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Hugo-Boss')">Hugo Boss</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Davidoff')">Davidoff</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Calvin')">Calvin Klein</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('Amouage')">Amouage</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="filterByBrand('all')">Tất cả</a></li>
+                    </ul>
+                </li>
+        
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="index.html">TRANG CHỦ</a>
+                </li>
+        
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="nuocHoaDropdown" role="button" data-bs-toggle="dropdown">NƯỚC HOA</a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Nước hoa Nam</a></li>
+                    <li><a class="dropdown-item" href="#">Nước hoa Nữ</a></li>
+                    </ul>
+                </li>
+        
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="#">CẨM NANG NƯỚC HOA</a>
+                </li>
+        
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="blogDropdown" role="button" data-bs-toggle="dropdown">BLOG</a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Review</a></li>
+                    <li><a class="dropdown-item" href="#">Tips & Tricks</a></li>
+                    </ul>
+                </li>
+        
+                <!-- Giỏ hàng -->
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <i class="bi bi-cart4"></i> Giỏ hàng
+                    </a>
+                </li>
+        
+                <!-- Chính sách -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white fw-bold" href="#" id="chinhSachDropdown" role="button" data-bs-toggle="dropdown">CHÍNH SÁCH</a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Chính sách đổi trả</a></li>
+                    <li><a class="dropdown-item" href="#">Giao hàng & Thanh toán</a></li>
+                    </ul>
+                </li>
+                </ul>
+        
+                <!-- Đăng nhập / Đăng ký (nằm ngoài cùng phải) -->
+                <ul class="navbar-nav ms-lg-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">ĐĂNG NHẬP</a>
+                        <form id="loginForm">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#registerModal" >ĐĂNG KÝ</a>
+                        <form id="registerForm">
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+
+        <!-- Đăng nhập Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Đăng nhập</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="loginEmail" placeholder="Nhập email của bạn">
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Nhập mật khẩu của bạn">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Đăng ký Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="registerModalLabel">Đăng ký tài khoản</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerForm">
+                            <div class="mb-3">
+                                <label for="registerEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="registerEmail" placeholder="Nhập email của bạn" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="registerPassword" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" id="registerPassword" placeholder="Nhập mật khẩu của bạn" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Xác nhận mật khẩu của bạn" required>
+                                <small id="error-message" class="text-danger d-none">Mật khẩu xác nhận không khớp!</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner -->
+        <header class="bg-light text-center">
+            <div class="container py-5">
+            <h1 class="display-5 fw-bold">Khám phá hương thơm quyến rũ</h1>
+            <p class="lead">Bộ sưu tập nước hoa cao cấp dành cho bạn</p>
+            <a href="#products" class="btn btn-primary btn-lg mt-3">Xem sản phẩm</a>
+            </div>
+            <!-- Hình ảnh quảng cáo -->
+            <img src="../img/slideshow_6.jpg" alt="Quảng cáo nước hoa" class="img-fluid w-100">
+        </header>
+    
+        <!-- Product Section -->
+        <section id="products" class="py-5 bg-body-tertiary">
+        <div class="container">
+            <h2 class="text-center mb-4">Sản phẩm nổi bật</h2>
+            <div class="row g-4">
+            <!-- Loop Sản phẩm -->
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand = 'Ralph-Lauren'>
+                    <div class="card h-100">
+                    <img src="../img/ralph-lauren-polo-blue.jpg" class="card-img-top" alt="Ralph-Lauren">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Ralph Lauren Polo Blue EDP</h5>
+                            <p class="card-text">Hương thơm mạnh mẽ, đầy nam tính.</p>
+                            <p class="text-danger fw-bold">2.300.000₫</p>
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalRalph">Xem chi tiết</button>
+                        </div>
+                    </div>
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalRalph" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title">Nước Hoa Ralph Lauren Polo Blue EDP - Thông tin chi tiết</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/ralph-lauren-polo-blue.jpg" class="img-fluid rounded" alt="Ralph-Lauren">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Hương thơm mạnh mẽ, nam tính, phù hợp cho phái mạnh lịch lãm.</p>
+                                        <p><strong>Thương hiệu:</strong> Raph Lauren </p>
+                                        <p><strong>Phong cách:</strong> Nam tính, hiện đại</p>
+                                        <p><strong>Dung tích:</strong> 125ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">2.300.000₫</span></p>
+
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 1, name: 'Nước Hoa Ralph Lauren Polo Blue EDP', price: 2300000})">Thêm vào giỏ</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Nautica">
+                    <div class="card h-100">
+                        <img src="../img/nautica-voyage.jpg" class="card-img-top" alt="nautica-voyage">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Nautica Voyage EDT</h5>
+                            <p class="card-text">Lãng mạn và năng động, có quy tắc riêng của mình..</p>
+                            <p class="text-danger fw-bold">1.450.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalNautica">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalNautica" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nautica Voyage EDT - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/nautica-voyage.jpg" class="img-fluid rounded" alt="nautica-voyage">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Lãng mạn và năng động, luôn tôn thờ các quy tắc riêng của mình.</p>
+                                        <p><strong>Thương hiệu:</strong> Nautica</p>
+                                        <p><strong>Phong cách:</strong> Lãng mạn, năng động.</p>
+                                        <p><strong>Dung tích:</strong> 200ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">1.450.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 2, name: 'Nước Hoa Nautica Voyage EDT', price: 1450000})">Thêm vào giỏ</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Marc Jacobs">
+                    <div class="card h-100">
+                    <img src="../img/marc-jacobs-daisy-dream.jpg" class="card-img-top" alt="Marc-Jacobs-Daisy-Dream">
+                    <div class="card-body">
+                        <h5 class="card-title">Nước Hoa Marc Jacobs Daisy Dream EDT</h5>
+                        <p class="card-text"> Mơ mộng và tinh tế.</p>
+                        <p class="text-danger fw-bold">2.100.000₫</p>
+                        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalMarc">Xem chi tiết</button>
+                    </div>
+                    </div>
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalMarc" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Marc Jacobs Daisy Dream EDT - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/marc-jacobs-daisy-dream.jpg" class="img-fluid rounded" alt="Marc-Jacobs-Daisy-Dream">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa Marc Jacobs Daisy Dream EDT mở đầu bằng hương nước hoa bung tỏa mạnh mẽ đầu tiên mang nốt hương của mâm xôi với hương quả mọng và lê ướt át, hương nước dừa xuất hiện cũng khá sớm. Hương thơm không quá nồng, vì mùi nước dừa khá khác biệt so với cơm dừa. Sự hòa quyện của lớp nền trái cây mọng nước tạo nên nét thanh mát, không quá ngọt nhưng lại mang được nét nổi bật của sự trang nhã.</p>
+                                        <p><strong>Thương hiệu:</strong> Marc Jacobs </p>
+                                        <p><strong>Phong cách:</strong>Mơ mộng và tinh tế.</p>
+                                        <p><strong>Dung tích:</strong> 100ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">2.100.000₫</span></p>
+
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 3, name: 'Nước Hoa Marc Jacobs Daisy Dream EDT', price: 2100000})">Thêm vào giỏ</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Dolce-Gabbana">
+                    <div class="card h-100">
+                        <img src="../img/d-g-light-blue-intense.jpg" class="card-img-top" alt="d-g-light-blue-intense">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa D&G Light Blue Intense EDP</h5>
+                            <p class="card-text">Tươi mát.</p>
+                            <p class="text-danger fw-bold">2.500.000₫</p>
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalLight">Xem chi tiết</button>
+                        </div>
+                    </div>
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalLight" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa D&G Light Blue Intense EDP - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/d-g-light-blue-intense.jpg" class="img-fluid rounded" alt="d-g-light-blue-intense">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa D&G Light Blue Intense EDP mở đầu hương thơm được ví như mặt nước biển Địa Trung Hải xanh ngát. Hương chanh thơm ngát và vị ngọt riêng biệt từ táo Granny Smith như những gợn sóng xô vào khứu giác từng đợt, ập vào trong tâm trí một nguồn năng lượng tươi mát và thoải mái mà nơi đây đem tới. </p>
+                                        <p><strong>Thương hiệu:</strong> Dolce & Gabbana </p>
+                                        <p><strong>Phong cách:</strong>Tươi mát</p>
+                                        <p><strong>Dung tích:</strong> 100ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">2.500.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 4, name: 'Nước Hoa Marc Jacobs Daisy Dream EDT', price: 2500000})">Thêm vào giỏ</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Davidoff">
+                    <div class="card h-100">
+                        <img src="../img/davidoff-cool-water-woman.jpg" class="card-img-top" alt="davidoff-cool-water-woman">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Davidoff Cool Water Woman EDT</h5>
+                            <p class="card-text">cảm giác hắc nhẹ, tinh khiết và tươi mát</p>
+                            <p class="text-danger fw-bold">1.150.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalDavidoff">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalDavidoff" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Davidoff Cool Water Woman EDT - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/davidoff-cool-water-woman.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa nữ Davidoff Cool Water Woman EDT của thương hiệu Davidoff được ra mắt vào năm 1996. Cool Water Woman EDT đã đem đến sự thành công sau mười năm cho ra mắt dòng Davidoff Cool Water EDT dành cho phái mạnh. Nó tạo ra hiệu ứng dịu nhẹ với nhưng thành phần hương tươi mát gợi cho chúng ta nhớ đến những cơn gió đại dương mát lạnh, nước biển, các loại trái cây và hương gỗ.</p>
+                                        <p><strong>Thương hiệu:</strong> Davidoff</p>
+                                        <p><strong>Phong cách:</strong> cảm giác hắc nhẹ, tinh khiết và tươi mát</p>
+                                        <p><strong>Dung tích:</strong> 100ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">1.150.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 5, name: 'Nước Hoa Davidoff Cool Water Woman EDT', price: 1150000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Versace">
+                    <div class="card h-100">
+                        <img src="../img/versace-eros.jpg" class="card-img-top" alt="versace-eros">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Versace Eros EDP</h5>
+                            <p class="card-text">năng lượng tích cực, thể hiện niềm đam mê </p>
+                            <p class="text-danger fw-bold">2.150.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalVersace">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalVersace" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Versace Eros EDP - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/versace-eros.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa nam Versace Eros Eau de Parfum của thương hiệu Versace được ra mắt năm 2020 là bản nâng cấp từ phiên bản Versac Eros EDT, mang đến cho người dùng cái nhìn hoàn toàn mới. Lấy cảm hứng từ thần thoại Hy Lạp - vị thần tình yêu Eros luôn mang đến hạnh phúc cho mọi người, siêu phẩm nước hoa này như mang đến một luồng năng lượng tích cực, thể hiện niềm đam mê và ham muốn mãnh liệt của người dùng.</p>
+                                        <p><strong>Thương hiệu:</strong> Versace</p>
+                                        <p><strong>Phong cách:</strong> năng lượng tích cực, thể hiện niềm đam mê </p>
+                                        <p><strong>Dung tích:</strong> 100ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">2.150.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 6, name: 'Nước Hoa Versace Eros EDP', price: 2150000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Dolce-Gabbana">
+                    <div class="card h-100">
+                        <img src="../img/d-g-light-blue-summer-vibes-pour-homme.jpg" class="card-img-top" alt="Vibes">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa D&G Light Blue Summer Vibes Pour Homme EDT</h5>
+                            <p class="card-text">khẳng định chất riêng của mình</p>
+                            <p class="text-danger fw-bold">1.900.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalVibes">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalVibes" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa D&G Light Blue Summer Vibes Pour Homme EDT- Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/d-g-light-blue-summer-vibes-pour-homme.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa nam Light Blue Summer Vibes Pour Homme là phiên bản giới hạn của thương hiệu Dolce & Gabbana được ra mắt vào mùa hè 2023. Đây là một tuyệt tác mùi hương mới đến từ Alberto Morillas. Dolce&Gabbana Light Blue Summer Vibes Pour Homme EDT là thành viên thuộc nhóm hương gỗ thơm. Mùi hương nổi bật nhờ sự tươi mát của nhựa cây bách và chanh vàng Sicily mang lại nét sống động và rạng rỡ cùng gỗ hổ phách ấm áp như ánh mặt trời mùa hè. ight Blue Pour Homme Summer Vibes mang đến một trải nghiệm hương thơm đầy sức sống và phóng khoáng như thể tách biệt hoàn toàn ra khỏi thế giới mùi hương để khẳng định chất riêng của mình. </p>
+                                        <p><strong>Thương hiệu:</strong> Dolce & Gabbana </p>
+                                        <p><strong>Phong cách:</strong> khẳng định chất riêng của mình. </p>
+                                        <p><strong>Dung tích:</strong> 125ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">1.900.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 7, name: 'Nước Hoa D&G Light Blue Summer Vibes Pour Homme EDT', price: 1900000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Hugo-Boss">
+                    <div class="card h-100">
+                        <img src="../img/hugo-boss-man.jpg" class="card-img-top" alt="Bossman">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Hugo Boss Man EDT</h5>
+                            <p class="card-text">cay nồng, nam tính</p>
+                            <p class="text-danger fw-bold">1.550.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalBossman">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalBossman" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Hugo Boss Man EDT - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/hugo-boss-man.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa Hugo Boss Man EDT là một nốt màu thanh mát và tươi mới. Mở đầu với hương thơm tươi mát từ cam quýt, pha lẫn với hương táo xanh tạo nên một cảm giác tười mát, sau đó được nhấn mạnh bằng hương bạc hà và oải hương. Hugo Boss Man EDT nhanh chóng vẽ nên những ấn tượng khó quên với tông hương sảng khoái, mọng nước nhưng không kém phần quyến luyến theo một vẻ rất riêng. </p>
+                                        <p><strong>Thương hiệu:</strong> Hugo Boss </p>
+                                        <p><strong>Phong cách:</strong> cay nồng, nam tính </p>
+                                        <p><strong>Dung tích:</strong> 125ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">1.550.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 8, name: 'Nước Hoa Hugo Boss Man EDT', price: 1550000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Versace">
+                    <div class="card h-100">
+                        <img src="../img/versace-pour-homme.jpg" class="card-img-top" alt="Pour">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Versace Pour Homme EDT</h5>
+                            <p class="card-text">mạnh mẽ và đam mê</p>
+                            <p class="text-danger fw-bold">2.400.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalPour">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalPour" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Versace Pour Homme EDT - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/versace-pour-homme.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa nam Versace Pour Homme EDT được thương hiệu Versace cho ra mắt năm 2008. Mùi hương được pha trộn bởi nhà pha chế nổi tiếng Alberto Morillas. Versace Pour Homme EDT được kết hợp để trở thành cặp đôi quyến rũ cùng với Versace Pour Femme, cặp đôi này là một gợi ý cho bạn sự lựa chọn hoàn hảo dành cho bản thân và “ai kia”. Nếu Pour Femme quyến rũ, sâu lắng thì Pour Homme đầy mạnh mẽ và đam mê. </p>
+                                        <p><strong>Thương hiệu:</strong> Versace </p>
+                                        <p><strong>Phong cách:</strong> mạnh mẽ và đam mê</p>
+                                        <p><strong>Dung tích:</strong> 200ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">2.400.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 9, name: 'Nước Hoa Versace Pour Homme EDT<', price: 2400000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Gucci">
+                    <div class="card h-100">
+                        <img src="../img/gucci-flora-gorgeous-jasmine.jpg" class="card-img-top" alt="Flora">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Gucci Flora Gorgeous Jasmine EDP</h5>
+                            <p class="card-text">Mị lực, say đắm</p>
+                            <p class="text-danger fw-bold">3.100.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalFlora">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalFlora" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Gucci Flora Gorgeous Jasmine EDP - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/gucci-flora-gorgeous-jasmine.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa Flora Gorgeous Jasmine là hương khi bạn ôm một chiếc rổ mây ra vườn Grasse hái những búp nhài trong một chiều đầu thu. Những bông nhài ấy ngậm nắng mật ong suốt một mùa hè, nên trong hương nhài đã có vương chút tiêu hồng ngọt ngào. Điểm nốt hoa mộc lan, quýt hồng và gỗ đàn hương – bài ca nhài trắng đắm say như một ly rượu hoa.  </p>
+                                        <p><strong>Thương hiệu:</strong> Gucci</p>
+                                        <p><strong>Phong cách:</strong> Mị lực, say đắm</p>
+                                        <p><strong>Dung tích:</strong> 100ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">3.100.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 10, name: 'Nước Hoa Versace Pour Homme EDT', price: 3100000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Dior">
+                    <div class="card h-100">
+                        <img src="../img/dior-addict.jpg" class="card-img-top" alt="Addict">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Dior Addict EDP</h5>
+                            <p class="card-text">Quyến rũ, thu hút</p>
+                            <p class="text-danger fw-bold">3.250.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalAddict">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalAddict" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Dior Addict EDP - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/dior-addict.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa nữ Addict EDP của thương hiệu Christian Dior được ra mắt vào năm 2014 là 1 phiên bản kế tiếp trong bộ sưu tập của dòng nước hoa Dior Addict. Chuyên gia chế tạo ra loại nước hoa này là Francois Demachy và mùi hương của nó được xếp loại vào nhóm hương hoa cỏ phương Đông nồng nàn. Dior Addict EDP thuộc nhóm hương hoa cỏ phương đông và hiện đại, sinh động và dễ thương với màu xanh đậm xâu thẳm và sức mạnh gợi cảm của hoa xương rồng đêm. Đây là chai nước hoa có hương thơm quyến rũ và cực kỳ thu hút. </p>
+                                        <p><strong>Thương hiệu:</strong> Dior</p>
+                                        <p><strong>Phong cách:</strong> Quyến rũ, thu hút</p>
+                                        <p><strong>Dung tích:</strong> 100ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">3.250.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 11, name: 'Nước Hoa Dior Addict EDP', price: 3250000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Product -->
+                <div class="col-md-3 product" data-brand="Amouage">
+                    <div class="card h-100">
+                        <img src="../img/amouage-interlude-man.jpg" class="card-img-top" alt="Interlude">
+                        <div class="card-body">
+                            <h5 class="card-title">Nước Hoa Amouage Interlude Man EDP</h5>
+                            <p class="card-text">khơi gợi lên sự “nổi loạn”</p>
+                            <p class="text-danger fw-bold">4.450.000₫</p>
+                            <!-- Modal Trigger Button -->
+                            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#productDetailModalInterlude">Xem chi tiết</button>
+                        </div>
+                    </div>
+
+                    <!-- Modal Chi tiết -->
+                    <div class="modal fade" id="productDetailModalInterlude" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Nước Hoa Amouage Interlude Man EDP - Thông tin chi tiết</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body row">
+                                    <div class="col-md-5">
+                                        <img src="../img/amouage-interlude-man.jpg" class="img-fluid rounded" alt="davidoff-cool-water-woman">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p><strong>Mô tả:</strong> Nước hoa nam Amouage Interlude Man là chai nước hoa mang tính biểu tượng của Amouage. So với những mùi hương như Lyric hay Reflection, Interlude Man phải gọi là thứ dữ. Thú dữ Interlude được kiến tạo nên nhờ note hương da thuộc thơm nồng nàn lại cuồng bạo, lẩn khuất và biến ảo nhờ nhựa hương, tiếp tục trở nên mạnh mẽ và thoát tục nhờ trầm hương, đàn hương, nhũ hương. Mùi hương sống động, tiến triển không ngừng, đem lại cho chủ nhân trải nghiệm thơm bất ngờ và thăng hoa không giới hạn.</p>
+                                        <p><strong>Thương hiệu:</strong> Amouage</p>
+                                        <p><strong>Phong cách:</strong> khơi gợi lên sự “nổi loạn”</p>
+                                        <p><strong>Dung tích:</strong> 100ml</p>
+                                        <p><strong>Giá:</strong> <span class="text-danger fw-bold">4.450.000₫</span></p>
+                                        <button class="btn btn-outline-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="addToCart({id: 12, name: 'Nước Hoa Amouage Interlude Man EDP', price: 4450000})">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-4 mt-5">
+            <div class="container text-center">
+              <p class="mb-1 fw-bold">© 2025 Nước Hoa VIP</p>
+              <p class="mb-0">Địa chỉ: 123 Đường Hoa Hồng, TP. HCM | SĐT: 0909 123 456 | Email: support@nuochoavip.vn</p>
+              <a href="sitemap.html" class="text-white">Sơ đồ trang</a>
+            </div>
+          </footer>
+          
+
+        <!-- Giỏ Hàng Modal -->
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Giỏ hàng của bạn</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="cartItemsList">Chưa có sản phẩm nào trong giỏ hàng.</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Tiếp tục mua</button>
+                        <button class="btn btn-danger" id="checkoutBtn">Thanh toán</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    
+        <!-- Đăng nhập / Đăng ký Modal -->
+        <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tài khoản</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs mb-3" id="authTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button">Đăng nhập</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button">Đăng ký</button>
+                </li>
+                </ul>
+                <div class="tab-content">
+                <!-- Đăng nhập -->
+                <div class="tab-pane fade show active" id="login">
+                    <form>
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="loginEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" id="loginPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    </form>
+                </div>
+                <!-- Đăng ký -->
+                <div class="tab-pane fade" id="register">
+                    <form>
+                    <div class="mb-3">
+                        <label for="registerName" class="form-label">Họ tên</label>
+                        <input type="text" class="form-control" id="registerName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="registerEmail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="registerPassword" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" id="registerPassword">
+                    </div>
+                    <button type="submit" class="btn btn-success">Đăng ký</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Giỏ hàng ban đầu (dùng localStorage để lưu trữ giỏ hàng)
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Hàm thêm sản phẩm vào giỏ hàng
+        function addToCart(product) {
+                // Kiểm tra xem sản phẩm đã có trong giỏ chưa
+                const existingProductIndex = cart.findIndex(item => item.id === product.id);
+                if (existingProductIndex > -1) {
+                    // Nếu đã có thì tăng số lượng
+                    cart[existingProductIndex].quantity++;
+                } else {
+                    // Nếu chưa có, thêm sản phẩm mới vào giỏ
+                    cart.push({...product, quantity: 1});
+                }
+
+                // Lưu giỏ hàng vào localStorage
+                localStorage.setItem("cart", JSON.stringify(cart));
+
+                // Cập nhật giỏ hàng modal
+                updateCartModal();
+            }
+
+        // Hàm cập nhật danh sách sản phẩm trong giỏ hàng
+        function updateCartModal() {
+                const cartItemsList = document.getElementById("cartItemsList");
+
+                if (cart.length === 0) {
+                    cartItemsList.innerHTML = "Chưa có sản phẩm nào trong giỏ hàng.";
+                } else {
+                    cartItemsList.innerHTML = "";
+                    cart.forEach(item => {
+                        const cartItem = document.createElement("div");
+                        cartItem.classList.add("cart-item");
+                        cartItem.innerHTML = `
+                            <div class="row">
+                                <div class="col-8">${item.name} - ${item.quantity} x ${item.price}₫</div>
+                                <div class="col-4 text-end">
+                                    <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">Xóa</button>
+                                </div>
+                            </div>
+                        `;
+                        cartItemsList.appendChild(cartItem);
+                    });
+                }
+            }
+
+        // Hàm xóa sản phẩm khỏi giỏ hàng
+        function removeFromCart(productId) {
+                cart = cart.filter(item => item.id !== productId);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCartModal();
+            }
+
+            // Cập nhật giỏ hàng khi trang được tải
+            document.addEventListener("DOMContentLoaded", function() {
+                updateCartModal();
+            });
+        // Lắng nghe sự kiện submit form
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngừng gửi form mặc định
+
+            // Lấy giá trị từ các trường mật khẩu
+            var password = document.getElementById('registerPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Kiểm tra mật khẩu và xác nhận mật khẩu
+            if (password !== confirmPassword) {
+                // Hiển thị thông báo lỗi
+                document.getElementById('error-message').classList.remove('d-none');
+            } else {
+                // Nếu mật khẩu khớp, tiếp tục với hành động đăng ký (hoặc gửi form)
+                alert('Đăng ký thành công!');
+                // Gửi form hoặc thực hiện các bước tiếp theo
+            }
+        });
+
+        function searchProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let products = document.querySelectorAll('.product');
+
+            products.forEach(function(product) {
+                let name = product.innerText.toLowerCase();
+                if (name.includes(input)) {
+                product.style.display = '';
+                } else {
+                product.style.display = 'none';
+                }
+            });
+        }
+
+        function filterByBrand(brand) {
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const productBrand = product.getAttribute('data-brand');
+                if (brand === 'all' || productBrand === brand) {
+                product.style.display = '';
+                } else {
+                product.style.display = 'none';
+                }
+            });
+        }
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                document.getElementById('error-message').classList.remove('d-none');
+                return;
+            }
+
+            // Lưu user vào localStorage
+            const user = { email, password };
+            localStorage.setItem('user', JSON.stringify(user));
+
+            alert('Đăng ký thành công!');
+            document.getElementById('registerForm').reset();
+            document.getElementById('error-message').classList.add('d-none');
+            });
+
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+
+                const savedUser = JSON.parse(localStorage.getItem('user'));
+
+                if (savedUser && savedUser.email === email && savedUser.password === password) {
+                    alert('Đăng nhập thành công!');
+                    localStorage.setItem('isLoggedIn', 'true');
+                    document.getElementById('loginForm').reset();
+                    // Đóng modal (nếu có sử dụng Bootstrap)
+                    const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                    if (loginModal) loginModal.hide();
+                } else {
+                    alert('Sai tài khoản hoặc mật khẩu!');
+                }
+            });
+            document.addEventListener('DOMContentLoaded', function () {
+                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                if (isLoggedIn) {
+                    // Ví dụ: thay nút "ĐĂNG NHẬP" bằng "XIN CHÀO!"
+                    const loginBtn = document.querySelector('[data-bs-target="#loginModal"]');
+                    if (loginBtn) {
+                    loginBtn.textContent = 'Xin chào!';
+                    loginBtn.removeAttribute('data-bs-toggle');
+                    loginBtn.removeAttribute('data-bs-target');
+                    }
+                }
+            });
+            if (isLoggedIn) {
+                const loginBtn = document.querySelector('[data-bs-target="#loginModal"]');
+                if (loginBtn) {
+                    loginBtn.outerHTML = `<a class="nav-link text-white fw-bold" href="#" onclick="showUserInfo()">Tài khoản của tôi</a>`;
+                }
+            }
+            function showUserInfo() {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user) {
+                    alert(`Email của bạn là: ${user.email}`);
+                    // Hoặc mở modal chi tiết nếu muốn
+                } else {
+                    alert('Không tìm thấy thông tin tài khoản.');
+                }
+            }
+    </script>
+</body>
+</html>
