@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thanh Toán</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container my-5">
+    <h3 class="mb-4">Thông tin thanh toán</h3>
+
+    <div class="border p-3 mb-4">
+      <h5>Sản phẩm trong giỏ:</h5>
+      <ul id="orderSummary" class="list-group mb-2"></ul>
+      <p class="fw-bold">Tổng tiền: <span id="totalAmount">0₫</span></p>
+    </div>
+
+    <form id="shippingForm">
+      <div class="mb-3">
+        <label for="fullName" class="form-label">Họ tên</label>
+        <input type="text" class="form-control" id="fullName" required>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Số điện thoại</label>
+        <input type="tel" class="form-control" id="phone" required>
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Địa chỉ giao hàng</label>
+        <textarea class="form-control" id="address" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Xác nhận thanh toán</button>
+    </form>
+      <!-- Nút quay về trang chủ -->
+    <div class="mt-4">
+      <a href="index.html" class="btn btn-secondary">← Quay về trang chủ</a>
+    </div>
+  </div>
+
+
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const orderSummary = document.getElementById("orderSummary");
+    const totalAmount = document.getElementById("totalAmount");
+  
+    let total = 0;
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+      li.textContent = `${item.name} x ${item.quantity}`;
+      const price = document.createElement("span");
+      price.className = "fw-bold";
+      price.textContent = `${(item.quantity * item.price).toLocaleString('vi-VN')}₫`;
+      li.appendChild(price);
+      orderSummary.appendChild(li);
+      total += item.quantity * item.price;
+    });
+  
+    totalAmount.textContent = total.toLocaleString('vi-VN') + "₫";
+  
+    // Xử lý form thanh toán
+    document.getElementById("shippingForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Ngăn gửi form thật
+  
+      // Giả lập xử lý thanh toán
+      alert("🎉 Thanh toán thành công! Cảm ơn bạn đã mua hàng.");
+  
+      // Xóa giỏ hàng
+      localStorage.removeItem("cart");
+  
+      // Chuyển về trang chủ sau 1 giây (tuỳ chọn)
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
+    });
+  </script>
+  
+</body>
+</html>

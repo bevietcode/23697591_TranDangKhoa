@@ -162,7 +162,10 @@
         <!-- Banner -->
         <header class="bg-light text-center">
             <div class="container py-5">
-            <h1 class="display-5 fw-bold">Khám phá hương thơm quyến rũ</h1>
+            <h1 class="display-4 fw-bold text-uppercase" style="color: #a61010; letter-spacing: 2px;">
+                ✨ Khoa Scent Shop ✨
+            </h1>
+            <h2 class="display-5 fw-bold">Khám phá hương thơm quyến rũ</h2>
             <p class="lead">Bộ sưu tập nước hoa cao cấp dành cho bạn</p>
             <a href="#products" class="btn btn-primary btn-lg mt-3">Xem sản phẩm</a>
             </div>
@@ -635,7 +638,7 @@
         <!-- Footer -->
         <footer class="bg-dark text-white py-4 mt-5">
             <div class="container text-center">
-              <p class="mb-1 fw-bold">© 2025 Nước Hoa VIP</p>
+              <p class="mb-1 fw-bold">© Khoa Scent Shop</p>
               <p class="mb-0">Địa chỉ: 123 Đường Hoa Hồng, TP. HCM | SĐT: 0909 123 456 | Email: support@nuochoavip.vn</p>
               <a href="sitemap.html" class="text-white">Sơ đồ trang</a>
             </div>
@@ -661,9 +664,6 @@
             </div>
         </div>
 
-
-
-    
         <!-- Đăng nhập / Đăng ký Modal -->
         <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -875,21 +875,38 @@
                     }
                 }
             });
-            if (isLoggedIn) {
-                const loginBtn = document.querySelector('[data-bs-target="#loginModal"]');
-                if (loginBtn) {
-                    loginBtn.outerHTML = `<a class="nav-link text-white fw-bold" href="#" onclick="showUserInfo()">Tài khoản của tôi</a>`;
-                }
-            }
-            function showUserInfo() {
-                const user = JSON.parse(localStorage.getItem('user'));
-                if (user) {
-                    alert(`Email của bạn là: ${user.email}`);
-                    // Hoặc mở modal chi tiết nếu muốn
-                } else {
-                    alert('Không tìm thấy thông tin tài khoản.');
-                }
-            }
+            document.getElementById("checkoutBtn").addEventListener("click", function () {
+                window.location.href = "checkout.html";
+            });
+
+            document.getElementById("checkoutBtn").addEventListener("click", function () {
+                // Ẩn modal giỏ hàng
+                const cartModal = bootstrap.Modal.getInstance(document.getElementById("cartModal"));
+                if (cartModal) cartModal.hide();
+
+                // Cuộn xuống phần thanh toán
+                document.querySelector(".container.my-5").scrollIntoView({ behavior: "smooth" });
+
+                // Cập nhật danh sách sản phẩm và tổng tiền ở phần thanh toán
+                const orderSummary = document.getElementById("orderSummary");
+                const totalAmount = document.getElementById("totalAmount");
+                orderSummary.innerHTML = "";
+                let total = 0;
+
+                cart.forEach(item => {
+                    const li = document.createElement("li");
+                    li.className = "list-group-item d-flex justify-content-between align-items-center";
+                    li.textContent = `${item.name} x ${item.quantity}`;
+                    const price = document.createElement("span");
+                    price.className = "fw-bold";
+                    price.textContent = `${item.price * item.quantity}₫`;
+                    li.appendChild(price);
+                    orderSummary.appendChild(li);
+                    total += item.price * item.quantity;
+                });
+
+                totalAmount.textContent = total.toLocaleString('vi-VN') + "₫";
+            });
     </script>
 </body>
 </html>
